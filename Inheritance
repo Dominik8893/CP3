@@ -1,1 +1,124 @@
+// ConsoleApplication1.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
 
+#include <iostream>
+using namespace std;
+
+
+
+class Vehicle{       
+  public:            
+      int Wheels;
+      int Passangers;
+
+public:
+      void Set_Wheels();
+
+      int Get_Wheels() { return Wheels; };
+
+      void Set_Pass();
+
+      int Get_Pass() { return Passangers; }
+
+    };
+
+class Truck :public Vehicle 
+{
+    int Cargo;
+    void Set_Cargo();
+    int Get_Cargo() { return Cargo; }
+    void show();
+};
+
+class Car : public Vehicle
+{
+    int YearMade;
+    string type;
+    void Set_Type();
+    string Get_Type() { return type; }
+    void show();
+};
+
+class Motorcycle : public Vehicle
+{
+    int Make;
+    void Set_Make();
+    int Get_Make() { return Make; }
+    void show();
+};
+
+
+/////////////            Main 
+int main()
+{
+    
+    
+    cout << "SetCargo:";
+    Truck Set_Cargo();
+    //cout << "\n";
+
+    cout << "SetType:";
+    Car Set_Type();
+   // cout << "\n";
+
+    cout << "SetMake:";
+    Motorcycle Set_Make;
+    //cout << "\n";
+
+    Truck show();
+ //   Car show();
+   // Motorcycle show();
+    
+  
+
+
+}
+
+// Declaring Functions
+
+void Vehicle::Set_Wheels()
+{
+    cin >> Wheels;
+}
+
+
+void Vehicle::Set_Pass()
+{
+    cin >> Passangers;
+}
+//Set
+
+
+void Truck::Set_Cargo()
+{
+    cin >> Cargo;
+}
+
+void Car::Set_Type()
+{
+    cin >> type;
+}
+
+void Motorcycle::Set_Make()
+{
+    cin >> Make;
+}
+
+
+
+
+
+
+//Show
+void Truck::show()
+{
+    cout << Cargo;
+}
+void Car::show()
+{
+    cout << type;
+}
+void Motorcycle::show()
+{
+    cout << Make;
+}
