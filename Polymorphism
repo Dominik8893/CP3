@@ -1,1 +1,112 @@
 //Polymorphism Dominik Gierecki
+
+#include <iostream>
+using namespace std;
+
+// Driver Code
+
+class Figure
+{
+protected:
+    float Area = 10;
+
+public:
+    virtual void CalculateArea() = 0;
+    virtual void ShowArea()
+    {
+        cout << "Area of Figure is: " << Area;
+    }
+};
+
+class Square : public Figure
+{
+    float Side;
+
+public:
+    Square(float s = 1)
+    {
+        Side = s;
+    }
+
+    virtual void CalculateArea()
+    {
+        Area = (Side*Side);
+    }
+
+    virtual void ShowArea()
+    {
+        cout << "Square Area is: " << Area;
+    }
+
+
+};
+
+
+class Circle :public Figure
+{
+    float Radius;
+
+public:
+    Circle(float R = 0.3184)
+    {
+        Radius = R;
+    }
+
+    virtual void CalculateArea()
+    {
+        Area = (3.14 * Radius * Radius);
+
+    }
+
+    virtual void ShowArea()
+    {
+        {
+            cout << "Circle Area is: " << Area;
+        }
+    }
+};
+
+class Triangle : public Figure
+{
+    float Base;
+    float Height;
+
+public:
+    Triangle(float b = 1.0, float h = 2.0)
+    {
+        Base = b;
+        Height = h;
+    }
+
+    virtual void CalculateArea()
+    {
+        Area = (Base * Height) / 2;
+    }
+
+    virtual void ShowArea()
+    {    
+            cout << "Triangle Area is: " << Area;        
+    }
+};
+
+
+int main()
+{
+    Square s(2.3);
+    Circle c(3.5);
+    Triangle t(2.7, 4.1);
+
+
+    Figure* Array[3];
+    Array[0] = &s;
+    Array[1] = &c;
+    Array[2] = &t;
+    
+    for (int i = 0; i <= 2; i++)
+    {
+        Array[i]->CalculateArea();
+        Array[i]->ShowArea();
+
+    }
+    return 0;
+}
