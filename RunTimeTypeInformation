@@ -1,0 +1,124 @@
+// RunTimeTypeInformaion.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+#include <stdio.h>
+#include <vector>
+#include <time.h> 
+#include <typeinfo>
+
+using namespace std;
+
+class Shape
+{
+protected:
+	double a, b;
+public:
+	Shape() {};
+	Shape(double a, double b)
+	{
+		this->a = a;
+		this->b = b;
+	}
+
+	virtual double area() = 0;
+};
+
+class Triangle : virtual public Shape
+{
+public:
+	Triangle() {};
+	Triangle(double a, double h) :Shape(a, h) {};
+	double area() { return 0.5 * a * b; }
+};
+
+class Rectangle : virtual public Shape
+{
+public:
+	Rectangle() {};
+	Rectangle(double a, double b)
+		:Shape(a, b) {};
+	double area() { return a * b; };
+};
+
+
+
+class Square : public Rectangle
+{
+public:
+	Square() {};
+	Square(double a) : Rectangle(a, a) {};
+};
+
+void GenerateShape(Shape* arr[10])
+{
+	double r;
+	for (size_t i = 0; i < 10; i++)
+	{
+		r = (double)rand() / (RAND_MAX);
+		if (r < 0.5)
+		{
+			arr[i] = new Rectangle;
+
+		}
+		else
+		{
+			arr[i] = new Triangle;
+		}
+	}
+}
+
+void GenerateShape2(Shape* arr[10])
+{
+	double r;
+	for (size_t i = 0; i < 10; i++)
+	{
+		r = (double)rand() / (RAND_MAX);
+		if (r < 0.33)
+		{
+			arr[i] = new Rectangle;
+		}
+		else if (r < 0.66)
+		{
+			arr[i] = new Triangle;
+		}
+		else
+		{
+			arr[i] = new Square;
+		}
+	}
+}
+int main()
+{
+	srand(time(NULL)); //generating random seed for diffrent results each run
+
+	Shape* shapes[10];
+	GenerateShape(shapes);
+
+	cout << typeid(*shapes[0]).name() << "\n";
+	cout << typeid(*shapes[9]).name() << "\n";
+	if (typeid(*shapes[0]).name() == typeid(*shapes[9]).name())
+	{
+		cout << "true\n";
+	}
+	else
+	{
+		cout << "false\n";
+	}
+	//cout << (typeid(*shapes[0]).name() == typeid(*shapes[9]).name());
+
+	GenerateShape2(shapes);
+
+	vector<Rectangle*>Rectangles;
+	for (size_t i = 0; i < 10; i++)
+	{
+		if (dynamic_cast<Rectangle*>(shapes[i]))
+		{
+		Rectangles.push_back(dynamic_cast<Rectangle*>(shapes[i]));
+        }
+    }
+	for (size_t i = 0; i < Rectangles.size(); i++)
+	{
+		cout << typeid(*Rectangles[i]).name()<<"\n";
+	}
+}
