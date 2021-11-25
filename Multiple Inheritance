@@ -1,0 +1,117 @@
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+class Person
+{
+private:
+	string Name;
+	int Age;
+
+public:
+	Person(string m_Name, int m_Age) :
+		Name(m_Name), Age(m_Age)
+	{
+		cout << "Person created\n\n";
+	}
+	string GetName()
+	{
+		return Name;
+	}
+	int GetAge()
+	{
+		return Age;
+	}
+	void SetName(string m_Name)
+	{
+		Name = m_Name;
+	}
+	void SetAme(int m_Age)
+	{
+		Age = m_Age;
+	}
+	~Person()
+	{
+		cout << "Person destroyed\n\n";
+	}
+};
+
+class Employee
+{
+private:
+	double Wage;
+	int Id;
+public:
+	Employee(double m_Wage, int m_Id) :
+		Wage(m_Wage), Id(m_Id)
+	{
+		cout << "Employee created\n\n";
+	}
+	double GetWage(double m_Wage)
+	{
+		return Wage;
+	}
+	int GetId(int m_Id)
+	{
+		return Id;
+	}
+	void SetWage(double m_Wage)
+	{
+		Wage = m_Wage;
+    }
+	void SetId(int m_Id)
+	{
+		Id = m_Id;
+	}
+	~Employee()
+	{
+		cout << "Employee destroyed\n\n";
+	}
+};
+class Teacher :public Person, public Employee
+{
+private:
+	int TeachesGrade;
+	string Subject;
+public:
+	Teacher(string m_Name, int m_Age, double m_Wage, int m_Id, int m_TeachesGrade, string m_Subject)
+		:Person(m_Name, m_Age),
+		Employee(m_Wage, m_Id),
+		TeachesGrade(m_TeachesGrade),
+		Subject(m_Subject)
+	{
+		cout << "Teacher called\n\n";
+	}
+	int GetTeachesGrade()
+	{
+		return TeachesGrade;
+	}
+	string GetSubject()
+	{
+		return Subject;
+	}
+	void SetTeachesGrade(int m_TeachesGrade)
+	{
+		TeachesGrade = m_TeachesGrade;
+	}
+	void SetSubject(string m_Subject)
+	{
+		Subject = m_Subject;
+	}
+	~Teacher()
+	{
+		cout << "Teacher destroyed\n\n";
+	}
+
+};
+
+
+int main()
+{
+	Teacher me("Dominik",20,9999,1111,6,"It");
+	cout << me.GetName() << " is " << me.GetAge() << " years old he is the teacher of the " << me.GetTeachesGrade() << " grade and Teaches " << me.GetSubject() << "\n\n";
+	return 0;
+}
