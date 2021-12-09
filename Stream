@@ -1,0 +1,67 @@
+
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+int main()
+{
+	
+	stringstream BirdStringStream;
+	string BirdAttributes[3] = { "Name: ","Habitat: ","Wingspan: " };
+    string UserInput;
+	ofstream{ "bird.txt" };
+	fstream BirdFStream("bird.txt");
+	char c;
+
+	for (int i = 0; i <= 2; i++)
+	{
+		cout << "Give the bird a " << BirdAttributes[i];
+		getline(cin, UserInput);
+		BirdStringStream << BirdAttributes[i] << UserInput << endl;
+	}
+
+	BirdFStream << BirdStringStream.str();
+	BirdStringStream.str(" ");
+	BirdFStream.seekg(0);
+	
+	do
+	{
+		cout << "Has the bird gone extinct? Yes[y] or No[n]: ";
+		cin >> c;
+	}
+	while (c != 'y' && c != 'n');
+
+	if (c == 'y')
+	{ 
+		BirdStringStream << "This bird has gone extinct." << endl; 
+	}
+
+	else 
+	{ 
+		BirdStringStream << "This bird is not extinct." << endl; 
+	}
+
+	ofstream{ "extinct_bird.txt" };
+	fstream ExtinctBirdFStream("extinct_bird.txt");
+
+	for (int i = 0; i <= 2; i++)
+	{
+		getline(BirdFStream, UserInput);
+		BirdAttributes[i] = UserInput;
+	}
+
+	BirdFStream.close();
+
+	for (int i = 2; i >= 0; i--)
+	{
+		BirdStringStream << BirdAttributes[i] << endl;
+	}
+
+	ExtinctBirdFStream << BirdStringStream.str();
+	ExtinctBirdFStream.close();
+
+	return 0;
+}
