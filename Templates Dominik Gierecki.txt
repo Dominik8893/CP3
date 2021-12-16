@@ -1,0 +1,67 @@
+#include <iostream>
+
+using namespace std;
+
+template<class VariableType>
+class Calculator {
+
+private:
+    VariableType FirstVariable;
+    VariableType SecondVariable;
+
+public:
+    Calculator()
+    {
+        FirstVariable = 1;
+        SecondVariable = 1;
+    }
+
+    Calculator(VariableType n1, VariableType n2)
+    {
+        FirstVariable = n1;
+        SecondVariable = n2;
+    }
+    ~Calculator() {}
+
+    VariableType add() 
+    {
+        return FirstVariable + SecondVariable;
+    }
+ 
+    VariableType multiply() 
+    {
+        return FirstVariable * SecondVariable;
+    }
+
+    VariableType subtract()
+    {
+        return FirstVariable - SecondVariable;
+    }
+   
+    VariableType divide()
+    {
+        return FirstVariable / SecondVariable;
+    }
+
+    void ShowResult()
+    {
+        cout << add() << endl;
+        cout << subtract() << endl;
+        cout << multiply() << endl;
+        cout << divide() << endl;
+    }
+
+
+};
+
+int main()
+{
+    Calculator<int> Integers(9, 2);
+    Calculator<float> Floats(6.9, 2.3);
+
+    cout << "Integer:" << endl;
+    Integers.ShowResult();
+    cout << endl << "Float:" << endl;
+    Floats.ShowResult();
+    return 0;
+};
